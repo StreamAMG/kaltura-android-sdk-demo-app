@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/playerContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Service URL"/>
+    <EditText
+        android:id="@+id/txtSERVICE_URL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="http://staging-joe.streamuk.com"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Partner ID"/>
+    <EditText
+        android:id="@+id/txtPARTNER_ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="3000021"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UI Conf ID"/>
+    <EditText
+        android:id="@+id/txtUI_CONF_ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="30000952"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Entry ID"/>
+    <EditText
+        android:id="@+id/txtENTRY_ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0_yhvlf5ho"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Key Session"/>
+    <EditText
+        android:id="@+id/txtKS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IZ Session"/>
+    <EditText
+        android:id="@+id/txtIZsession"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""/>
+
+    <Button
+        android:id="@+id/btnSaveTest"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Save and Test"/>
+
+</LinearLayout>

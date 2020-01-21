@@ -1,0 +1,7 @@
+include ':googlemediaframework'
+project(':googlemediaframework').projectDir=new File('kaltura-android-sdk/googlemediaframework')
+
+include ':playerSDK'
+project(':playerSDK').projectDir=new File('kaltura-android-sdk/playerSDK')
+
+include ':app'

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">StreamAMG</string>
+    <string name="app_id">SET_HERE_YOUR_CHROMECAST_ID</string>
+</resources>
