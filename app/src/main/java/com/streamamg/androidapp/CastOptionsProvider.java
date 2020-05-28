@@ -1,4 +1,3 @@
-
 package com.streamamg.androidapp;
 
 import android.content.Context;
@@ -23,7 +22,7 @@ import java.util.List;
 public class CastOptionsProvider implements OptionsProvider {
 
 
-    public static final String CUSTOM_NAMESPACE = "urn:x-cast:com.kaltura.cast.player";
+    public static final String CUSTOM_NAMESPACE = "urn:x-cast:com.connectsdk";
 
 
 //    @Override
@@ -51,14 +50,14 @@ public class CastOptionsProvider implements OptionsProvider {
                 .build();
 
         CastMediaOptions mediaOptions = new CastMediaOptions.Builder()
-                 .setImagePicker(new ImagePickerImpl())
+                .setImagePicker(new ImagePickerImpl())
                 .setNotificationOptions(notificationOptions)
                 .setExpandedControllerActivityClassName(ExpandedControlsActivity.class.getName())
                 .build();
 
         return new CastOptions.Builder()
                 .setReceiverApplicationId(context.getString(R.string.app_id))
-                //.setSupportedNamespaces(supportedNamespaces)
+                .setSupportedNamespaces(supportedNamespaces)
                 .setCastMediaOptions(mediaOptions)
                 .build();
     }

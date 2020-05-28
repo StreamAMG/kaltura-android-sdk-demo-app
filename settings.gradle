@@ -1,4 +1,4 @@
-include ':googlemediaframework'
+include ':googlemediaframework', ':AMGUniversalCast'
 project(':googlemediaframework').projectDir=new File('kaltura-android-sdk/googlemediaframework')
 
 include ':playerSDK'

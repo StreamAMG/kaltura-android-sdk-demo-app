@@ -32,6 +32,10 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 dependencies {
@@ -43,7 +47,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'com.google.android.gms:play-services:11.8.0'
-    implementation 'androidx.mediarouter:mediarouter:1.0.0'
     implementation project(':playerSDK')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation project(path: ':AMGUniversalCast')
 }
+
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

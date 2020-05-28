@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontwarn okio.**
+-dontwarn com.amazon.**
+-dontwarn com.caverock.**
+-dontwarn okhttp3.**
+-keep class com.connectsdk.**       { * ; }
+-keep class androidx.core.app.CoreComponentFactory { *; }
