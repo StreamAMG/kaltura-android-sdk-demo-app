@@ -193,6 +193,25 @@ public class MainActivity  extends AppCompatActivity implements KPErrorEventList
             }
         });
 
+
+
+        Button btnPaaS = findViewById(R.id.btnPaaS);
+        btnPaaS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PaaSActivity.class);
+
+                intent.putExtra("SERVICE_URL", SERVICE_URL);
+                intent.putExtra("UI_CONF_ID", UI_CONF_ID);
+                intent.putExtra("PARTNER_ID", PARTNER_ID);
+                intent.putExtra("ENTRY_ID", ENTRY_ID);
+                intent.putExtra("KS", KS);
+                intent.putExtra("IZsession", izsession);
+
+                startActivity(intent);
+            }
+        });
+
         Button btnPlay = findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
