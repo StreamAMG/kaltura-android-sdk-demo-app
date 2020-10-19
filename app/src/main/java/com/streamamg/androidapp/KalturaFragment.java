@@ -23,6 +23,7 @@ public class KalturaFragment extends Fragment {
     private String ENTRY_ID;
     private String KS;
     private String izsession;
+    public String adLink = "";
 
     View mFragmentView;
     private PlayerViewController mPlayerView;
@@ -47,6 +48,7 @@ public class KalturaFragment extends Fragment {
             ENTRY_ID = preferences.getString("ENTRY_ID", "");
             KS = preferences.getString("KS", "");
             izsession = preferences.getString("IZsession", "");
+            adLink = preferences.getString("AdLink", "");
         }
 
         KPPlayerConfig config = new KPPlayerConfig(SERVICE_URL, UI_CONF_ID, PARTNER_ID);
@@ -57,6 +59,17 @@ public class KalturaFragment extends Fragment {
         if (izsession.length() > 0) {
             config.addConfig("izsession", izsession);
         }
+
+        if (adLink.length() > 0) {
+            config.addConfig("doubleClick.plugin", "true");
+            config.addConfig("doubleClick.leadWithFlash", "false");
+            config.addConfig("doubleClick.adTagUrl", adLink);
+        } else {
+            config.addConfig("doubleClick.plugin", "false");
+            config.addConfig("doubleClick.leadWithFlash", "false");
+            config.addConfig("doubleClick.adTagUrl", null);
+        }
+
 
         mPlayerView.setOnKPStateChangedEventListener(new KPStateChangedEventListener() {
             @Override

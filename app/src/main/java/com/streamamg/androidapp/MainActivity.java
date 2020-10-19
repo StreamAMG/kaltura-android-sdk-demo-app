@@ -59,6 +59,7 @@ public class MainActivity  extends AppCompatActivity implements KPErrorEventList
     public String ENTRY_ID = "{entry_id}";
     public String KS = "";
     public String izsession = "";
+    public String adLink = "";
 
     public boolean saveSettings = false;
 
@@ -96,6 +97,7 @@ public class MainActivity  extends AppCompatActivity implements KPErrorEventList
             ENTRY_ID = preferences.getString("ENTRY_ID", "");
             KS = preferences.getString("KS", "");
             izsession = preferences.getString("IZsession", "");
+            adLink = preferences.getString("AdLink", "");
         }
 
         Button btnFragment = findViewById(R.id.btnFragment);
@@ -188,6 +190,7 @@ public class MainActivity  extends AppCompatActivity implements KPErrorEventList
                 intent.putExtra("ENTRY_ID", ENTRY_ID);
                 intent.putExtra("KS", KS);
                 intent.putExtra("IZsession", izsession);
+                intent.putExtra("AdLink", adLink);
 
                 startActivity(intent);
             }
@@ -221,6 +224,7 @@ public class MainActivity  extends AppCompatActivity implements KPErrorEventList
                 intent.putExtra("ENTRY_ID", ENTRY_ID);
                 intent.putExtra("KS", KS);
                 intent.putExtra("IZsession", izsession);
+                intent.putExtra("AdLink", adLink);
 
                 startActivity(intent);
             }
@@ -281,6 +285,7 @@ public class MainActivity  extends AppCompatActivity implements KPErrorEventList
         ((EditText)popupOptions.findViewById(R.id.txtENTRY_ID)).setText(ENTRY_ID);
         ((EditText)popupOptions.findViewById(R.id.txtKS)).setText(KS);
         ((EditText)popupOptions.findViewById(R.id.txtIZsession)).setText(izsession);
+        ((EditText)popupOptions.findViewById(R.id.txtadlink)).setText(adLink);
 
         // Create the popup window; decide on the layout parameters
         popupWindow = new PopupWindow(popupOptions, MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -312,6 +317,7 @@ public class MainActivity  extends AppCompatActivity implements KPErrorEventList
                 ENTRY_ID = ((EditText)popupOptions.findViewById(R.id.txtENTRY_ID)).getText().toString();
                 KS = ((EditText)popupOptions.findViewById(R.id.txtKS)).getText().toString();
                 izsession = ((EditText)popupOptions.findViewById(R.id.txtIZsession)).getText().toString();
+                adLink = ((EditText)popupOptions.findViewById(R.id.txtadlink)).getText().toString();
 
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
                 SharedPreferences.Editor editor = preferences.edit();
@@ -321,6 +327,7 @@ public class MainActivity  extends AppCompatActivity implements KPErrorEventList
                 editor.putString("ENTRY_ID", ENTRY_ID);
                 editor.putString("KS", KS);
                 editor.putString("IZsession", izsession);
+                editor.putString("AdLink", adLink);
                 editor.apply();
 
                 if (openFragment) {
@@ -352,6 +359,16 @@ public class MainActivity  extends AppCompatActivity implements KPErrorEventList
                 }
                 if (izsession.length() > 0) {
                     config.addConfig("izsession", izsession);
+                }
+
+                if (adLink.length() > 0) {
+                    config.addConfig("doubleClick.plugin", "true");
+                    config.addConfig("doubleClick.leadWithFlash", "false");
+                    config.addConfig("doubleClick.adTagUrl", adLink);
+                } else {
+                    config.addConfig("doubleClick.plugin", "false");
+                    config.addConfig("doubleClick.leadWithFlash", "false");
+                    config.addConfig("doubleClick.adTagUrl", null);
                 }
 
                 // Set your flashvars here
