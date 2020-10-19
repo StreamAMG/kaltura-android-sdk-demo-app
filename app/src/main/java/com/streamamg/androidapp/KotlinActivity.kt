@@ -20,6 +20,7 @@ class KotlinActivity : AppCompatActivity(), KPErrorEventListener, KPPlayheadUpda
     var ENTRY_ID: String = ""
     var KS: String = ""
     var izsession: String = ""
+    var adLink: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,7 @@ class KotlinActivity : AppCompatActivity(), KPErrorEventListener, KPPlayheadUpda
         ENTRY_ID = intent.getStringExtra("ENTRY_ID")
         KS = intent.getStringExtra("KS")
         izsession = intent.getStringExtra("IZsession")
+        adLink = intent.getStringExtra("AdLink")
 
         window.setFlags(
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
@@ -65,6 +67,17 @@ class KotlinActivity : AppCompatActivity(), KPErrorEventListener, KPPlayheadUpda
 
                 if (KS.length > 0) config.ks = KS
                 if (izsession.length > 0) config.addConfig("izsession", izsession)
+
+                if (adLink.length > 0) {
+                    config.addConfig("doubleClick.plugin", "true")
+                    config.addConfig("doubleClick.leadWithFlash", "false")
+                    config.addConfig("doubleClick.adTagUrl", adLink)
+                } else {
+                    config.addConfig("doubleClick.plugin", "false")
+                    config.addConfig("doubleClick.leadWithFlash", "false")
+                    config.addConfig("doubleClick.adTagUrl", null)
+                }
+
 
                 // Set your flashvars here
 //                config.addConfig("chromecast.receiverLogo", "true")
