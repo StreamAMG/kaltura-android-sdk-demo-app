@@ -89,7 +89,7 @@ public class MainActivity  extends AppCompatActivity implements KPErrorEventList
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String check = preferences.getString("SERVICE_URL", "");
-        if ((!check.equalsIgnoreCase("") && saveSettings) || savedInstanceState != null)
+        if ((!check.equalsIgnoreCase("")) || savedInstanceState != null)
         {
             SERVICE_URL = preferences.getString("SERVICE_URL", "");
             PARTNER_ID = preferences.getString("PARTNER_ID", "");
@@ -210,6 +210,7 @@ public class MainActivity  extends AppCompatActivity implements KPErrorEventList
                 intent.putExtra("ENTRY_ID", ENTRY_ID);
                 intent.putExtra("KS", KS);
                 intent.putExtra("IZsession", izsession);
+                intent.putExtra("AdLink", adLink);
 
                 startActivity(intent);
             }

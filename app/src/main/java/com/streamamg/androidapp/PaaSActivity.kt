@@ -23,6 +23,7 @@ class PaaSActivity : AppCompatActivity(){
     var ENTRY_ID: String = ""
     var KS: String = ""
     var izsession: String = ""
+    var adLink: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class PaaSActivity : AppCompatActivity(){
         ENTRY_ID = intent.getStringExtra("ENTRY_ID")
         KS = intent.getStringExtra("KS")
         izsession = intent.getStringExtra("IZsession")
+        adLink = intent.getStringExtra("AdLink")
 
 
         window.setFlags(
@@ -63,9 +65,9 @@ class PaaSActivity : AppCompatActivity(){
 
     private fun setUpPlayer() {
         myService?.setupPlayer(this, findViewById(R.id.player))
-        myService?.updateMedia(MediaBundle(SERVICE_URL, PARTNER_ID, UI_CONF_ID, ENTRY_ID))
-
-
+        var bundle = MediaBundle(SERVICE_URL, PARTNER_ID, UI_CONF_ID, ENTRY_ID, KS, izsession)
+            bundle.adURL = adLink
+            myService?.updateMedia(bundle)
     }
 
     override fun onDestroy() {
