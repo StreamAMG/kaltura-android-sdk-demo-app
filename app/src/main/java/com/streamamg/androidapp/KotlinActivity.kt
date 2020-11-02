@@ -221,7 +221,7 @@ private fun updatePlaybackLocation(location: KotlinActivity.PlaybackLocation) {
         }
         if (isGooglePlayServicesAvailable(this)) {
             try {
-                mCastProvider = KCastFactory.createCastProvider(this, CastMediaControlIntent.DEFAULT_MEDIA_RECEIVER_APPLICATION_ID, "") as KCastProviderV3Impl
+                mCastProvider = KCastFactory.createCastProvider(this, getString(R.string.app_id), "") as KCastProviderV3Impl //CastMediaControlIntent.DEFAULT_MEDIA_RECEIVER_APPLICATION_ID
                 mCastProvider?.addCastStateListener(mCastStateListener)
                 mCastProvider?.setKCastProviderListener(object : KCastProviderListener {
                     override fun onCastMediaRemoteControlReady(castMediaRemoteControl: KCastMediaRemoteControl) {
