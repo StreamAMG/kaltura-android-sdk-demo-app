@@ -91,12 +91,13 @@ class PaaSActivity : AppCompatActivity(), KPlayerServiceListener{
 
     override fun onDestroy() {
         super.onDestroy()
-        if (mPlayerView.mediaControl != null) {
-            if (mPlayerView.mediaControl.isPlaying) {
-                mPlayerView.mediaControl.pause()
-            }
-        }
-        mPlayerView.removePlayer()
+        Log.d("WRD", "PaaS On Destroy")
+//        if (mPlayerView.mediaControl != null) {
+//            if (mPlayerView.mediaControl.isPlaying) {
+//                mPlayerView.mediaControl.pause()
+//            }
+//        }
+//        mPlayerView.removePlayer()
         val serviceIntent = Intent(this, BackgroundPlayerService::class.java)
         myService = null
         stopService(serviceIntent)

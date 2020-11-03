@@ -14,7 +14,6 @@ import android.support.v4.media.MediaBrowserCompat
 import android.util.Log
 import android.view.*
 import android.webkit.WebView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -82,7 +81,6 @@ class KotlinActivity : AppCompatActivity(), KPErrorEventListener, KPPlayheadUpda
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kotlin)
-
         SERVICE_URL = intent.getStringExtra("SERVICE_URL")
         UI_CONF_ID = intent.getStringExtra("UI_CONF_ID")
         PARTNER_ID = intent.getStringExtra("PARTNER_ID")
@@ -90,52 +88,26 @@ class KotlinActivity : AppCompatActivity(), KPErrorEventListener, KPPlayheadUpda
         KS = intent.getStringExtra("KS")
         izsession = intent.getStringExtra("IZsession")
         adLink = intent.getStringExtra("AdLink")
-
         window.setFlags(
-                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
-                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
-
-
-
+            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
+        )
 getCast()
         initPlayer()
     }
 
-//    override fun onDestroy() {
-//        if (mPlayerView != null) {
-//            if (mPlayerView!!.mediaControl != null) {
-//                if (mPlayerView!!.mediaControl.isPlaying) {
-//                    mPlayerView!!.mediaControl.pause()
-//                }
-//            }
-//            mPlayerView!!.removePlayer()
-//        }
-//        super.onDestroy()
-//    }
-
-
 private fun updatePlaybackLocation(location: KotlinActivity.PlaybackLocation) {
     mLocation = location
-//    if (location == PlaybackLocation.LOCAL) {
-//        if (mPlaybackState == PlaybackState.PLAYING
-//                || mPlaybackState == PlaybackState.BUFFERING) {
-//            setCoverArtStatus(null)
-//            startControllersTimer()
-//        } else {
-//            stopControllersTimer()
-//            setCoverArtStatus(mSelectedMedia.getImage(0))
-//        }
-//    } else {
-////        stopControllersTimer()
-////        setCoverArtStatus(mSelectedMedia.getImage(0))
-////        updateControllersVisibility(false)
-//    }
 }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.menu, menu)
-        mediaRouteMenuItem = CastButtonFactory.setUpMediaRouteButton(applicationContext, menu, R.id.cast_menu_item)
+        mediaRouteMenuItem = CastButtonFactory.setUpMediaRouteButton(
+            applicationContext,
+            menu,
+            R.id.cast_menu_item
+        )
         return true
     }
 
@@ -147,13 +119,10 @@ private fun updatePlaybackLocation(location: KotlinActivity.PlaybackLocation) {
                 if (!SERVICE_URL.startsWith("http", true)) {
                     SERVICE_URL = "http://" + SERVICE_URL
                 }
-
                 val config = KPPlayerConfig(SERVICE_URL, UI_CONF_ID, PARTNER_ID)
                 config.entryId = ENTRY_ID
-
                 if (KS.length > 0) config.ks = KS
                 if (izsession.length > 0) config.addConfig("izsession", izsession)
-
                 if (adLink.length > 0) {
                     config.addConfig("doubleClick.plugin", "true")
                     config.addConfig("doubleClick.leadWithFlash", "false")
@@ -163,33 +132,19 @@ private fun updatePlaybackLocation(location: KotlinActivity.PlaybackLocation) {
                     config.addConfig("doubleClick.leadWithFlash", "false")
                     config.addConfig("doubleClick.adTagUrl", null)
                 }
-
-
-                // Set your flashvars here
                 config.addConfig("chromecast.receiverLogo", "true")
-//                config.addConfig("fullScreenBtn.plugin", "true")
-
                 mPlayerView!!.initWithConfiguration(config)
-
                 mPlayerView!!.setOnKPErrorEventListener(this)
                 mPlayerView!!.setOnKPPlayheadUpdateEventListener(this)
                 mPlayerView!!.setOnKPFullScreenToggledEventListener(this)
                 mPlayerView!!.setOnKPStateChangedEventListener(this)
-
-//                var eventListener = PlayerViewController.EventListener { eventName, params -> Toast.makeText(this, "KPlayerEvent: " + eventName, Toast.LENGTH_LONG) }
-//                mPlayerView!!.addKPlayerEventListener("onEnableKeyboardBinding", "eventID", eventListener)
-//                mPlayerView!!.addKPlayerEventListener("firstPlay", "id", eventListener)
-
                 LogUtils.enableDebugMode()
                 LogUtils.enableWebViewDebugMode()
                 WebView.setWebContentsDebuggingEnabled(true)
             }
         }
-
         return mPlayerView
     }
-
-
 
     private fun getCast() {
         mCastProvider?.removeCastStateListener(mCastStateListener)
@@ -221,14 +176,30 @@ private fun updatePlaybackLocation(location: KotlinActivity.PlaybackLocation) {
         }
         if (isGooglePlayServicesAvailable(this)) {
             try {
-                mCastProvider = KCastFactory.createCastProvider(this, getString(R.string.app_id), "") as KCastProviderV3Impl //CastMediaControlIntent.DEFAULT_MEDIA_RECEIVER_APPLICATION_ID
+                // To use Chromecast, you MUST provide a valid Chromecast App ID
+//                mCastProvider = KCastFactory.createCastProvider(
+//                    this,
+//                    getString(R.string.app_id),
+//                    ""
+//                ) as KCastProviderV3Impl
+                mCastProvider = KCastFactory.createCastProvider(
+                    this,
+                    CastMediaControlIntent.DEFAULT_MEDIA_RECEIVER_APPLICATION_ID,
+                    ""
+                ) as KCastProviderV3Impl
                 mCastProvider?.addCastStateListener(mCastStateListener)
                 mCastProvider?.setKCastProviderListener(object : KCastProviderListener {
                     override fun onCastMediaRemoteControlReady(castMediaRemoteControl: KCastMediaRemoteControl) {
-                        Log.d(TAG, "onCastMediaRemoteControlReady: " + castMediaRemoteControl.hasMediaSession(false))
+                        Log.d(
+                            TAG,
+                            "onCastMediaRemoteControlReady: " + castMediaRemoteControl.hasMediaSession(
+                                false
+                            )
+                        )
                         if (mCastProvider == null) return
                         if (mCastProvider!!.getCastMediaRemoteControl() == null) return
-                        mCastProvider!!.getCastMediaRemoteControl().addListener(object : KCastMediaRemoteControlListener {
+                        mCastProvider!!.getCastMediaRemoteControl().addListener(object :
+                            KCastMediaRemoteControlListener {
                             override fun onCastMediaProgressUpdate(currentPosition: Long) {
                                 Log.d(TAG, "onCastMediaProgressUpdate: $currentPosition")
                             }
@@ -263,7 +234,7 @@ private fun updatePlaybackLocation(location: KotlinActivity.PlaybackLocation) {
     }
 
     private fun stopCast() {
-        mCastProvider?.let {mCastProvider ->
+        mCastProvider?.let { mCastProvider ->
             if (mCastProvider.getCastMediaRemoteControl() != null) {
                 if (mCastProvider.getCastMediaRemoteControl().isPlaying()) {
                     mCastProvider.getCastMediaRemoteControl().pause()
@@ -302,11 +273,20 @@ private fun updatePlaybackLocation(location: KotlinActivity.PlaybackLocation) {
 
     override fun onKPlayerError(playerViewController: PlayerViewController?, error: KPError?) {}
 
-    override fun onKPlayerPlayheadUpdate(playerViewController: PlayerViewController?, currentTimeMilliSeconds: Long) {}
+    override fun onKPlayerPlayheadUpdate(
+        playerViewController: PlayerViewController?,
+        currentTimeMilliSeconds: Long
+    ) {}
 
-    override fun onKPlayerStateChanged(playerViewController: PlayerViewController?, state: KPlayerState?) {}
+    override fun onKPlayerStateChanged(
+        playerViewController: PlayerViewController?,
+        state: KPlayerState?
+    ) {}
 
-    override fun onKPlayerFullScreenToggled(playerViewController: PlayerViewController?, isFullscreen: Boolean) {
+    override fun onKPlayerFullScreenToggled(
+        playerViewController: PlayerViewController?,
+        isFullscreen: Boolean
+    ) {
         if (isFullscreen) {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
             mSensorStateChanges = SensorStateChangeActions.WATCH_FOR_LANDSCAPE_CHANGES
@@ -361,7 +341,10 @@ private fun updatePlaybackLocation(location: KotlinActivity.PlaybackLocation) {
         val widthRatio = screenWidth / factor
         val heightRatio = screenHeight / factor
         val ratio = "$widthRatio:$heightRatio"
-        Log.d(TAG, "calculateAspectRatio landscape " + screenWidth + "x" + screenHeight + " : " + ratio)
+        Log.d(
+            TAG,
+            "calculateAspectRatio landscape " + screenWidth + "x" + screenHeight + " : " + ratio
+        )
         return ratio
     }
 
@@ -376,8 +359,10 @@ private fun updatePlaybackLocation(location: KotlinActivity.PlaybackLocation) {
      * @param enable if set, sensor will be enabled.
      */
     private fun initialiseSensor(enable: Boolean) {
-        sensorEvent = object : OrientationEventListener(this,
-                SensorManager.SENSOR_DELAY_NORMAL) {
+        sensorEvent = object : OrientationEventListener(
+            this,
+            SensorManager.SENSOR_DELAY_NORMAL
+        ) {
             override fun onOrientationChanged(orientation: Int) {
                 /*
                  * This logic is useful when user explicitly changes orientation using player controls, in which case orientation changes gives no callbacks.

@@ -57,7 +57,9 @@ public class CastOptionsProvider implements OptionsProvider {
                 .build();
 
         return new CastOptions.Builder()
-          .setReceiverApplicationId(context.getString(R.string.app_id))
+                // To use Chromecast, you MUST provide a valid Chromecast App ID
+                // .setReceiverApplicationId(context.getString(R.string.app_id))
+                 .setReceiverApplicationId(CastMediaControlIntent.DEFAULT_MEDIA_RECEIVER_APPLICATION_ID)
                 .setCastMediaOptions(mediaOptions)
                 .build();
     }
