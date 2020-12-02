@@ -2,6 +2,7 @@ package com.streamamg.androidapp
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -238,6 +239,7 @@ class UniversalCastActivity : AppCompatActivity(), KPErrorEventListener, KPPlayh
 
     private fun playMedia() {
         var url = "${SERVICE_URL}/p/${PARTNER_ID}/sp/${PARTNER_ID}00/playManifest/entryId/${ENTRY_ID}/format/applehttp/protocol/http/a.m3u8?ks=${KS}"
+        Log.d("PTOLog", "Cast URL = $url")
         var mediaMimeType = "video/x-mpegurl" // Works on FireTV, Chromecast and Roku
 //        mediaMimeType = "application/x-mpegurl" // Works on FireTV and Chromecast (NO Roku)
         mediaMimeType = "video/mp2"

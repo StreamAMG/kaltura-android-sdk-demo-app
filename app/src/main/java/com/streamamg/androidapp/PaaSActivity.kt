@@ -89,22 +89,30 @@ class PaaSActivity : AppCompatActivity(), KPlayerServiceListener{
             myService?.updateMedia(bundle)
     }
 
+    override fun onResume() {
+        super.onResume()
+        myService?.refreshMedia()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         Log.d("WRD", "PaaS On Destroy")
-//        if (mPlayerView.mediaControl != null) {
-//            if (mPlayerView.mediaControl.isPlaying) {
-//                mPlayerView.mediaControl.pause()
-//            }
-//        }
-//        mPlayerView.removePlayer()
+        if (mPlayerView.mediaControl != null) {
+            if (mPlayerView.mediaControl.isPlaying) {
+                mPlayerView.mediaControl.pause()
+            }
+        }
+        mPlayerView.removePlayer()
         val serviceIntent = Intent(this, BackgroundPlayerService::class.java)
-        myService = null
         stopService(serviceIntent)
+        myService = null
     }
 
 
     private fun initPlayer() {
+
+BackgroundPlayerService.setNotificationIcon(R.drawable.ic_cast)
+
         val serviceIntent = Intent(this, BackgroundPlayerService::class.java)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
