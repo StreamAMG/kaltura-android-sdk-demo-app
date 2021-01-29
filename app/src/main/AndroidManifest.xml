@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
     <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden">
@@ -30,6 +31,8 @@
         <activity android:name=".WebviewActivity"></activity>
         <activity android:name=".KotlinActivity"></activity>
         <activity android:name=".UniversalCastActivity"></activity>
+        <activity android:name=".PaaSActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
 
         <activity
             android:name=".ExpandedControlsActivity"

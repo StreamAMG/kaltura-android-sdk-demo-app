@@ -9,4 +9,12 @@
         android:orderInCategory="102"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/cast_menu_item"
+        android:title="Cast"
+        android:orderInCategory="101"
+        android:icon="@drawable/ic_action_cast"
+        app:actionProviderClass="androidx.mediarouter.app.MediaRouteActionProvider"
+        app:showAsAction="always" />
+
 </menu>

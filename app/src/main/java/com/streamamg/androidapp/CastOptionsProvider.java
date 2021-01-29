@@ -2,6 +2,7 @@ package com.streamamg.androidapp;
 
 import android.content.Context;
 
+import com.google.android.gms.cast.CastMediaControlIntent;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.cast.framework.CastOptions;
 import com.google.android.gms.cast.framework.OptionsProvider;
@@ -56,8 +57,9 @@ public class CastOptionsProvider implements OptionsProvider {
                 .build();
 
         return new CastOptions.Builder()
-                .setReceiverApplicationId(context.getString(R.string.app_id))
-                .setSupportedNamespaces(supportedNamespaces)
+                // To use Chromecast, you MUST provide a valid Chromecast App ID
+                // .setReceiverApplicationId(context.getString(R.string.app_id))
+                 .setReceiverApplicationId(CastMediaControlIntent.DEFAULT_MEDIA_RECEIVER_APPLICATION_ID)
                 .setCastMediaOptions(mediaOptions)
                 .build();
     }
