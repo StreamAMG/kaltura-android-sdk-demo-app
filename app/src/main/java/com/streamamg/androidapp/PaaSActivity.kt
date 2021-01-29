@@ -24,7 +24,7 @@ import com.kaltura.playersdk.services.BackgroundPlayerService
 import com.kaltura.playersdk.types.KPError
 import com.kaltura.playersdk.types.MediaBundle
 
-class PaaSActivity : AppCompatActivity(), KPlayerServiceListener{
+class PaaSActivity : AppCompatActivity(), KPlayerServiceListener {
     var myService: BackgroundPlayerService? = null
     var serviceBound = false
 
@@ -61,7 +61,7 @@ class PaaSActivity : AppCompatActivity(), KPlayerServiceListener{
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             initPlayer()
         }
 
@@ -83,10 +83,10 @@ class PaaSActivity : AppCompatActivity(), KPlayerServiceListener{
     }
 
     private fun setUpPlayer() {
-        myService?.setupPlayer(this, mPlayerView,this)
+        myService?.setupPlayer(this, mPlayerView, this)
         var bundle = MediaBundle(SERVICE_URL, PARTNER_ID, UI_CONF_ID, ENTRY_ID, KS, izsession)
-            bundle.adURL = adLink
-            myService?.updateMedia(bundle)
+        bundle.adURL = adLink
+        myService?.updateMedia(bundle)
     }
 
     override fun onResume() {
@@ -110,13 +110,9 @@ class PaaSActivity : AppCompatActivity(), KPlayerServiceListener{
 
 
     private fun initPlayer() {
-
-BackgroundPlayerService.setNotificationIcon(R.drawable.ic_cast)
-
+        BackgroundPlayerService.setNotificationIcon(R.drawable.ic_cast)
         val serviceIntent = Intent(this, BackgroundPlayerService::class.java)
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
             startForegroundService(serviceIntent)
         } else {
             startService(serviceIntent)
@@ -201,7 +197,7 @@ BackgroundPlayerService.setNotificationIcon(R.drawable.ic_cast)
      */
     private fun initialiseSensor(enable: Boolean) {
         sensorEvent = object : OrientationEventListener(this,
-            SensorManager.SENSOR_DELAY_NORMAL) {
+                SensorManager.SENSOR_DELAY_NORMAL) {
             override fun onOrientationChanged(orientation: Int) {
                 /*
                  * This logic is useful when user explicitly changes orientation using player controls, in which case orientation changes gives no callbacks.
