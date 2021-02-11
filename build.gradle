@@ -22,6 +22,7 @@ allprojects {
         google()
         jcenter()
         maven { url "https://raw.github.com/synergian/wagon-git/releases"}
+        maven { url "https://api.bitbucket.org/2.0/repositories/sukdev/kaltura-android-sdk/src/releases"}
     }
 }
 

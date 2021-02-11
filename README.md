@@ -28,33 +28,7 @@
 
     A new folder should be created with name streamamg-android-app (if you didn't specify one)
 
-2. Move to the new directory.
-
-    Add **PlayerSDK** and **GoogleMediaFramework** (_Kaltura Android SDK_) into that directory:
-
-        git clone https://YOUR_USERNAME@bitbucket.org/sukdev/kaltura-android-sdk.git (optional same directory)
-
-    So the directories should be like this:
-
-    > :open_file_folder: Projects Directory
-    > > :file_folder:  streamamg-android-app
-    > > > :file_folder:  kaltura-android-sdk
-    > > > > :file_folder:  playerSDK
-    > > > >
-    > > > > :file_folder:  googlemediaframework
-    > > > >
-    > > > > _...Other files..._
-    > > >
-    > > > :file_folder:  app
-    > > >
-    > > > :file_folder:  gradle
-    > > >
-    > > > :file_folder:  fastlane
-    > > >
-    > > > _...Other files..._
-
-
-3. Open Android Studio and select `streamamg-android-app` directory.
+2. Open Android Studio and select `streamamg-android-app` directory.
 
     The project should run in any emulator as well as in any real device with API >= 21
 
